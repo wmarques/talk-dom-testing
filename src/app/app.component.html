@@ -3,35 +3,38 @@
 </mat-toolbar>
 
 
-
 <div class="w-96 mx-auto border p-4 mt-4" [formGroup]="form">
   <h1>
     Enregistrer un utilisateur
   </h1>
-  <div>
-    <mat-form-field appearance="fill" class="w-full" >
-      <mat-label>Email</mat-label>
-      <input matInput formControlName="email">
-    </mat-form-field>
-  </div>
+  <div class="space-y-4">
+    <div>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+        <mat-error *ngIf="form.get('email')?.invalid">Email invalide</mat-error>
+      </mat-form-field>
+    </div>
 
-  <div>
-    <mat-form-field appearance="fill" class="w-full" >
-      <mat-label>Mot de passe</mat-label>
-      <input matInput formControlName="password" type="password">
-    </mat-form-field>
-  </div>
+    <div>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput formControlName="password" type="password">
+      </mat-form-field>
+    </div>
 
-  <div>
-    <mat-form-field appearance="fill" class="w-full" >
-      <mat-label>Confirmer mot de passe</mat-label>
-      <input matInput formControlName="confirmPassword" type="password">
-    </mat-form-field>
-  </div>
+    <div>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Confirmer mot de passe</mat-label>
+        <input matInput formControlName="confirmPassword" type="password">
+      </mat-form-field>
+    </div>
 
-  <div class="flex justify-end space-x-2">
-    <button mat-flat-button>Annuler</button>
-    <button mat-flat-button color="primary">Enregistrer</button>
+    <div *ngIf="form.hasError('passwordDoNotMatch')" class="text-red-500">Les mots de passe ne correspondent pas</div>
+
+    <div class="flex justify-end space-x-2">
+      <button mat-flat-button>Annuler</button>
+      <button mat-flat-button color="primary" [disabled]="form.invalid">Enregistrer</button>
+    </div>
   </div>
-  {{form.value | json}}
 </div>

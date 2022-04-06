@@ -14,10 +14,25 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     this.form = this.fb.group({
-      email: ['', Validators.email],
-      password: [''],
-      confirmPassword: [''],
+      email: ['', [Validators.email, Validators.required]],
+      password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
+    }, {
+      validators: [this.validatePassword]
     });
+  }
+
+  validatePassword(f: FormGroup) {
+    console.log(f);
+    if (f.value.password === '' || f.value.confirmPassword === '') {
+      return null;
+    }
+    if (f.value.password === f.value.confirmPassword) {
+      return null;
+    }
+
+    return {passwordDoNotMatch: true}
+
   }
 
 
