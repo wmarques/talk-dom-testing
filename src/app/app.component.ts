@@ -23,7 +23,6 @@ export class AppComponent implements OnInit {
   }
 
   validatePassword(f: FormGroup) {
-    console.log(f);
     if (f.value.password === '' || f.value.confirmPassword === '') {
       return null;
     }
