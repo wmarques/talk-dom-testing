@@ -11,5 +11,5 @@ describe('App Component', () => {
     await render(AppComponent, {
       imports: [MatToolbarModule, MatFormFieldModule, MatInputModule, MatButtonModule, ReactiveFormsModule]
     });
-  })
+  });
 })
