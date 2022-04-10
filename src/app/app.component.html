@@ -32,7 +32,11 @@
 
     <div *ngIf="form.hasError('passwordDoNotMatch')" class="text-red-500">Les mots de passe ne correspondent pas</div>
 
-    <div class="flex justify-end space-x-2">
+    <div class="text-right">
+      <mat-checkbox formControlName="conditions">Accept conditions</mat-checkbox>
+    </div>
+
+    <div class="flex justify-end space-x-2 mt-2">
       <button mat-flat-button>Annuler</button>
       <button mat-flat-button color="primary" [disabled]="form.invalid">Enregistrer</button>
     </div>

@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
       email: ['', [Validators.email, Validators.required]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
+      conditions: [false, Validators.requiredTrue]
     }, {
       validators: [this.validatePassword]
     });
