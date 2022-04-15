@@ -20,10 +20,12 @@ describe('App Component', () => {
       // GIVEN
       await renderComponent();
 
-
       // WHEN
+      await userEvent.type(screen.getByLabelText(/Email/), 'invalidEmail');
+      fireEvent.blur(screen.getByLabelText(/Email/));
 
       // THEN
+      expect(screen.queryByText('Email invalide')).toBeInTheDocument();
     });
 
     test('should not display invalid error message when email is valid', async () => {
@@ -31,8 +33,11 @@ describe('App Component', () => {
       await renderComponent();
 
       // WHEN
+      await userEvent.type(screen.getByLabelText(/Email/), 'email.valide@test.fr');
+      fireEvent.blur(screen.getByLabelText(/Email/));
 
       // THEN
+      expect(screen.queryByText('Email invalide')).not.toBeInTheDocument();
     });
   });
 
@@ -42,8 +47,13 @@ describe('App Component', () => {
       await renderComponent();
 
       // WHEN
+      await userEvent.type(screen.getByLabelText(/Email/), 'email.valide@test.fr');
+      await userEvent.type(screen.getByLabelText(/Mot de passe/), 'email.valide@test.fr');
+      await userEvent.type(screen.getByLabelText(/Confirmer mot de passe/), 'email.valide@test.fr');
+      await userEvent.click(screen.getByText('Accept conditions'));
 
       // THEN
+      expect(screen.getByRole('button', {name: 'Enregistrer'})).toBeEnabled();
     })
   });
 
